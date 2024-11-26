@@ -1,7 +1,7 @@
-# Analtyics & Machine Learning Project: Car Sales analysis and Prediction
+# Analtyics & Machine Learning Project: Car Sales Analysis and Prediction
 ![cover](https://github.com/SammieBarasa77/walmart_sales/blob/main/assets/images/cover_final.png)
 
-# Table of Contents
+## Table of Contents
 
 1. [Introduction](#introduction)
 2. [Data Import](#data-import)
