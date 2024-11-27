@@ -34,11 +34,14 @@
    - [Price Sensitivity (Price vs Sales Volume)](#price-sensitivity-price-vs-sales-volume)
    - [Car Model Popularity (Most Sold Models)](#car-model-popularity-most-sold-models)
    - [Customer Segmentation (Clustering)](#customer-segmentation-clustering)
+   - [Visualizaltion](#visualizaltion)
 - [Insights, Findings, and Recommendations](#insights-findings-and-recommendations)
 
 ## Introduction
 
 This project explores a comprehensive analysis of car sales data to uncover key business insights that can help dealerships and manufacturers optimize their sales strategies. By analyzing various aspects such as car models, pricing trends, and sales volumes, this project identifies patterns and factors affecting car sales in the market. Key areas of exploration include price distribution across different models, sales performance over time, and regional sales insights. The goal is to provide actionable insights for decision-making, enabling stakeholders to enhance inventory management, pricing strategies, and sales forecasting.
+
+Download the dataset: 'https://github.com/SammieBarasa77/car_sales/blob/main/assets/docs/Car%20Sales.xlsx%20-%20car_data.csv'
 
 ## Data Import
 ```python
@@ -315,7 +318,7 @@ plt.xlabel("Residuals")
 plt.show()
 ```
 ![Resid](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/histogram_for_residuals.png)
-![Resid2](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/scatter_for_residuals.png)
+
 
 ```python
 # Scatter plot of residuals
@@ -326,6 +329,8 @@ plt.xlabel("Actual Sales")
 plt.ylabel("Residuals")
 plt.show()
 ```
+
+![Resid2](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/scatter_for_residuals.png)
 
 ## Other Analyses
 ### Price Distribution by Car Model Analysis
@@ -406,6 +411,8 @@ plt.show()
 ```
 ![segmentation](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/clustering.png)
 
+### Visualizaltion 
+Download the Tableau dashboard here: 'https://github.com/SammieBarasa77/car_sales/blob/main/assets/docs/Car%20Sales%20Dashboard.twb'
 
 ## Insights, Findings, and Recommendations
 
