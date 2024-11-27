@@ -412,7 +412,9 @@ plt.show()
 ![segmentation](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/clustering.png)
 
 ### Visualizaltion 
-Download the Tableau dashboard here: 'https://github.com/SammieBarasa77/car_sales/blob/main/assets/docs/Car%20Sales%20Dashboard.twb'
+![Dashboard](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/carsales_tableau.png)
+
+Download the Tableau dashboard file here: 'https://github.com/SammieBarasa77/car_sales/blob/main/assets/docs/Car%20Sales%20Dashboard.twb'
 
 ## Insights, Findings, and Recommendations
 
