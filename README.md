@@ -3,24 +3,24 @@
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Data Import](#data-import)
-3. [Data Understanding](#data-understanding)
-4. [Data Cleaning and Preprocessing](#data-cleaning-and-preprocessing)
+- [Introduction](#introduction)
+- [Data Import](#data-import)
+- [Data Understanding](#data-understanding)
+- [Data Cleaning and Preprocessing](#data-cleaning-and-preprocessing)
    - [Handle Missing Data](#handle-missing-data)
    - [Check for Missing Values](#check-for-missing-values)
    - [Filtering Outliers](#filtering-outliers)
-5. [Exploratory Data Analysis (EDA)](#exploratory-data-analysis-eda)
+- [Exploratory Data Analysis (EDA)](#exploratory-data-analysis-eda)
    - [Monthly Sales Revenue Trends](#monthly-sales-revenue-trends)
    - [Top Car Models by Price](#top-car-models-by-price)
    - [Regional Performance (Sales by Region)](#regional-performance-sales-by-region)
-6. [Feature Engineering](#feature-engineering)
+- [Feature Engineering](#feature-engineering)
    - [Income-to-Price Ratio](#income-to-price-ratio)
    - [Price Category Based on Price Ranges](#price-category-based-on-price-ranges)
-7. [Predictive Analytics](#predictive-analytics)
+- [Predictive Analytics](#predictive-analytics)
    - [Using Machine Learning to Predict Sales](#using-machine-learning-to-predict-sales)
    - [Visualizing the Prediction](#visualizing-the-prediction)
-8. [Key Metrics for Evaluation](#key-metrics-for-evaluation)
+- [Key Metrics for Evaluation](#key-metrics-for-evaluation)
    - [Mean Absolute Error (MAE)](#mean-absolute-error-mae)
    - [Mean Squared Error (MSE) and Root Mean Squared Error (RMSE)](#mean-squared-error-mse-root-mean-squared-error-rmse)
    - [R² Score](#r²-score)
@@ -28,21 +28,24 @@
    - [Feature Importance Analysis](#feature-importance-analysis)
    - [Cross-validation](#cross-validation)
    - [Residual Analysis](#residual-analysis)
-9. [Other Analyses](#other-analyses)
+- [Other Analyses](#other-analyses)
    - [Price Distribution by Car Model Analysis](#price-distribution-by-car-model-analysis)
    - [Seasonality of Sales](#seasonality-of-sales)
    - [Price Sensitivity (Price vs Sales Volume)](#price-sensitivity-price-vs-sales-volume)
    - [Car Model Popularity (Most Sold Models)](#car-model-popularity-most-sold-models)
    - [Customer Segmentation (Clustering)](#customer-segmentation-clustering)
-10. [Insights, Findings, and Recommendations](#insights-findings-and-recommendations)
+- [Insights, Findings, and Recommendations](#insights-findings-and-recommendations)
 
 ## Introduction
+
+This project explores a comprehensive analysis of car sales data to uncover key business insights that can help dealerships and manufacturers optimize their sales strategies. By analyzing various aspects such as car models, pricing trends, and sales volumes, this project identifies patterns and factors affecting car sales in the market. Key areas of exploration include price distribution across different models, sales performance over time, and regional sales insights. The goal is to provide actionable insights for decision-making, enabling stakeholders to enhance inventory management, pricing strategies, and sales forecasting.
 
 ## Data Import
 ```python
 car_data = pd.read_csv(r"C:\Users\samue\Downloads\Car Sales.xlsx - car_data.csv")  
 car_data
 ```
+![Data](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/dataset_preview.png)
 
 ## Data Understanding
 
@@ -55,6 +58,8 @@ print("\nUnique values per column:")
 for column in ['Company', 'Model', 'Dealer_Region']:
     print(f"{column}: {car_data[column].nunique()} unique values")
 ```
+![Overview](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/datset_overview_2.png)
+
 ## Data Cleaning and Preprocessing
 
 ### Handle Missing Data
@@ -65,7 +70,22 @@ for column in ['Company', 'Model', 'Dealer_Region']:
 missing_values = car_data.isnull().sum()
 print("Missing values:\n", missing_values)
 ```
+![missing values](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/missing_values.png)
+
 ### Filtering outliers out
+Visualizations to identify price and income outliers.
+```python
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Boxplot for Price
+sns.boxplot(x=car_data['Price ($)'])
+plt.title("Boxplot for Car Prices")
+plt.show()
+```
+![Outlir](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/boxplot_carprice.png)
+
 ```python
 # Recalculate the IQR, Q1, Q3, and boundaries
 Q1 = car_data['Price ($)'].quantile(0.25)
@@ -83,6 +103,7 @@ print(f"New dataset size after strict filtering: {filtered_data.shape}")
 print(f"Any remaining outliers above upper bound? {filtered_data['Price ($)'].max() > upper_bound}")
 print(f"Any remaining outliers below lower bound? {filtered_data['Price ($)'].min() < lower_bound}")
 ```
+![Outliers](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/outlier_quatiles.png)
 
 Box pplot without outliers
 ```python
@@ -90,22 +111,11 @@ sns.boxplot(x=car_data_filtered['Price ($)'])
 plt.title("Boxplot for Car Prices (Without Outliers)")
 plt.show()
 ```
+![Boxplot no outliers](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/boxplot_outliers_handles.png)
 
 ```python
 # Updating the dataset
 car_data = filtered_data
-```
-
-Visualizations to identify price and income outliers.
-```python
-
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# Boxplot for Price
-sns.boxplot(x=car_data['Price ($)'])
-plt.title("Boxplot for Car Prices")
-plt.show()
 ```
 
 ## Exploratory Data Analysis (EDA)
@@ -127,6 +137,8 @@ sales_overtime.plot(kind='line', title="Monthly Sales Revenue", ylabel="Revenue 
 plt.xticks(rotation=45)
 plt.show()
 ```
+![Monthly sales_rev](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/monthly_sales_rev_trends.png)
+
 ### Top Car Models by Price
 ```python
 # Aggregate data to get total price for each car model
@@ -137,6 +149,7 @@ top_models_by_price.plot(kind='barh', title="Top Car Models by Price", xlabel="T
 plt.gca().invert_yaxis()  # Invert y-axis for better readability
 plt.show()
 ```
+![top models](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/top_car_by_price.png)
 
 ### Regional Performance (Sales by Region)
 ```python
@@ -145,6 +158,7 @@ region_sales = car_data.groupby('Dealer_Region')['Price ($)'].sum().sort_values(
 region_sales.plot(kind='bar', title="Sales by Region", ylabel="Revenue ($)")
 plt.show()
 ```
+![Regional perf](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/sales_by_region.png)
 
 ## Feature Engineering
 ### Income-to-Price Ratio
@@ -160,6 +174,7 @@ car_data['Income_to_Price_Ratio'] = car_data['Annual Income'] / car_data['Price 
 
 car_data
 ```
+![Feature eng](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/feature_engineered_data.png)
 
 ## Predictive Analytics
 
@@ -205,6 +220,7 @@ plt.legend()
 plt.grid(True)
 plt.show()
 ```
+![pred visual](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/car_pred.png)
 
 ## Key Metrics for Evaluation
 
@@ -217,6 +233,7 @@ from sklearn.metrics import mean_absolute_error
 mae = mean_absolute_error(y_test, predictions)
 print(f"Mean Absolute Error (MAE): {mae}")
 ```
+![MAE](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/MAE_btn_pred_values.png)
 
 ### Mean Squared Error (MSE) and Root Mean Squared Error (RMSE)
 ```python
@@ -228,6 +245,7 @@ rmse = np.sqrt(mse)
 print(f"Mean Squared Error (MSE): {mse}")
 print(f"Root Mean Squared Error (RMSE): {rmse}")
 ```
+![mse and rmse](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/MAE_and_RMSE.png)
 
 ### R2 Score
 ```python
@@ -237,17 +255,18 @@ from sklearn.metrics import r2_score
 r2 = r2_score(y_test, predictions)
 print(f"R-squared (R²): {r2}")
 ```
+![R2](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/R-sqrd.png)
 
 ### Train - Test Performance  Comparison
 
 ```python
-
 r2_train = model.score(X_train, y_train)
 r2_test = model.score(X_test, y_test)
 
 print(f"R-squared (Train): {r2_train}")
 print(f"R-squared (Test): {r2_test}")
 ```
+![R2 train-test](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/R-sqrd_for_train_and_test.png)
 
 ### Feature Importance Analysis
 ```python
@@ -269,6 +288,7 @@ importance_df.plot(kind='barh', x='Feature', y='Importance', legend=False)
 plt.title('Feature Importance')
 plt.show()
 ```
+![Feature Imp](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/checking_for_feature_imp.png)
 
 ### Cross-validation
 ```python
@@ -279,6 +299,7 @@ cv_scores = cross_val_score(model, features, target, cv=5, scoring='r2')
 print(f"Cross-Validation R² Scores: {cv_scores}")
 print(f"Mean CV R²: {cv_scores.mean()}")
 ```
+![cross val](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/cross_validation.png)
 
 ### Residual Analysis
 ```python
@@ -293,6 +314,8 @@ plt.title("Residuals Distribution")
 plt.xlabel("Residuals")
 plt.show()
 ```
+![Resid](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/histogram_for_residuals.png)
+![Resid2](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/scatter_for_residuals.png)
 
 ```python
 # Scatter plot of residuals
@@ -307,8 +330,6 @@ plt.show()
 ## Other Analyses
 ### Price Distribution by Car Model Analysis
 ```python
-# Top 10 models 
-
 # Get the top 10 car models based on the count of sales
 top_10_models = car_data['Model'].value_counts().head(10).index
 
@@ -324,6 +345,7 @@ plt.xlabel("Car Model")
 plt.ylabel("Price ($)")
 plt.show()
 ```
+![Price_distn](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/price_distn_top_models.png)
 
 ### Seasonality of sales
 ```python
@@ -338,6 +360,7 @@ monthly_sales.plot(kind='line', title="Monthly Sales Trends", ylabel="Total Sale
 plt.xticks(monthly_sales.index, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], rotation=45)
 plt.show()
 ```
+![seasonality](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/monthly_sales_trends.png)
 
 ### Price Sensitivity(Price vs Sales Volume)
 ```python
@@ -348,6 +371,7 @@ price_vs_sales = car_data.groupby('Price ($)').size()
 price_vs_sales.plot(kind='line', title="Price vs. Sales Volume", ylabel="Number of Sales", figsize=(10, 6))
 plt.show()
 ```
+![price sensitivity](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/price_sensitivity.png)
 
 ### Car Model Popularity (Most Sold Models)
 ```python
@@ -358,6 +382,7 @@ top_models = car_data['Model'].value_counts().head(10)
 top_models.plot(kind='barh', title="Top 10 Most Sold Car Models", xlabel="Count of Sales", figsize=(10, 6))
 plt.show()
 ```
+![car popularity](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/most_sold_models.png)
 
 ### Customer Segmentation (Clustering)
 ```python
@@ -379,6 +404,9 @@ sns.scatterplot(x='Annual Income', y='Price ($)', hue='Cluster', data=car_data, 
 plt.title("Customer Segmentation - Annual Income vs Price")
 plt.show()
 ```
+![segmentation](https://github.com/SammieBarasa77/car_sales/blob/main/assets/images/clustering.png)
+
+
 ## Insights, Findings, and Recommendations
 
 #### **Insights**
